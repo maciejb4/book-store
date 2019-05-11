@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Books</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+<section>
+    <div class="jumbotron">
+        <div class="container" style="height:110px">
+        <h1 th:text="#{books.main}"></h1>
+            <p th:text="#{books.description}"></p>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <th:block th:each="book : ${bookList}">
+            <div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3 th:text="${book.id}"></h3>
+                        <p th:text="${book.title}"></p>
+                        <p th:text="${book.authors}"></p>
+                        <p th:text="#{'books.status.'+${book.status}}"></p>
+                        <p>
+                            <a th:href="@{'/books/book?id='+${book.id}}"
+                               class="btn btn-primary"> <span
+                                    class="glyphicon-info-sign glyphicon" th:text="#{books.details}"></span>
+                            </a>
+                        </p>
+                        <p>
+                            <a th:href="@{'/books/deleteBook?id='+${book.id}}"
+                               class="btn btn-primary"> <span
+                                    class="glyphicon-info-sign glyphicon" th:text="#{books.delete}"></span>
+                            </a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+</section>
+<p>
+    <a th:href="@{'/'}" class="btn btn-default">
+        <span class="glyphicon-hand-left glyphicon"></span> back
+    </a>
+</p>
+</div>
+</body>
+</html>

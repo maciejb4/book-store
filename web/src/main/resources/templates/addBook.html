@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title th:text="#{book.add}"></title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <section>
+        <div class="jumbotron">
+            <div class="container" style="height:100px">
+            <h1 th:text="#{book.main}"></h1>
+                <p th:text="#{book.add}"></p>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+    <div class="row">
+        <form action="#" th:action="@{/books/addBook}" th:object="${newBook}" method="post" class="form-horizontal">
+            <fieldset>
+                <legend th:text="#{book.add}"></legend>
+
+                <!-- Sample template for some fields in Book Entity -->
+                <div class="form-group">
+                    <label class="control-label col-lg-2" for="name" th:text="#{book.title}"></label>
+                    <div class="col-lg-10">
+                        <input id="name" type="text" th:field="*{title}" class="form:input-large"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2" for="authors" th:text="#{book.authors}"></label>
+                    <div class="col-lg-10">
+                        <input id="authors" type="text" th:field="*{authors}" class="form:input-large"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2" for="description" th:text="#{book.description}"></label>
+                    <div class="col-lg-10">
+                        <input id="description" type="text" th:field="*{description}" class="form:input-large"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2" for="categories" th:text="#{book.categories}"></label>
+                    <div class="col-lg-10">
+                        <select multiple id="categories" type="text" th:field="*{categories}" class="form:input-large">
+                            <option th:each="categories : ${categories}"
+                                    th:value="${categories}"
+                                    th:text="${categories}">
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-lg-2" for="status" th:text="#{book.status}"></label>
+                    <div id="status" class="col-lg-10">
+                        <input type="radio" th:name="${status}" th:field="*{status}" th:value="FREE" th:text="#{books.status.FREE}"></input>
+                        <input type="radio" th:name="${status}" th:field="*{status}" th:value="LOAN" th:text="#{books.status.LOAN}"></input>
+                        <input type="radio" th:name="${status}" th:field="*{status}" th:value="MISSING" th:text="#{books.status.MISSING}"></input>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="form-group">
+                <div class="col-lg-offset-2 col-lg-10">
+                    <a th:href="@{'/'}" class="btn btn-default">
+                        <span class="glyphicon-hand-left glyphicon"></span> back
+                    </a>
+                    <input type="submit" id="btnAdd" class="btn btn-primary"
+                           value="Create"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    </section>
+</div>
+</body>
+</html>
